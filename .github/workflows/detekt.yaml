@@ -1,0 +1,23 @@
+name: ktlint
+
+on:
+  push:
+    paths:
+      - "**/*.kt"
+      - ".github/workflows/ktlint.yml"
+jobs:
+  ktlint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "checkout"
+        uses: actions/checkout@v2
+
+      - name: detekt
+        run: ./gradlew detekt
+
+      - name: Get date
+        id: info
+        run: |
+          : # Get current date (YYMMDD)
+          echo "::set-output name=date::$(date +'%Y%m%d')"
